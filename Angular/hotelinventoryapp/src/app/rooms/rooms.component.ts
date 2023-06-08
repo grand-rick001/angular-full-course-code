@@ -47,6 +47,8 @@ export class RoomsComponent implements OnInit{
     }
   ]
 
+  color: string = 'red';
+
   constructor() {}
 
   ngOnInit(): void {}
