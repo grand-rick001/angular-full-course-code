@@ -1,3 +1,4 @@
+<!-- Template syntax - Data binding, interpolation, property binding, event binding -->
 <h1>Welcome to {{hotelName}}</h1>
 
 <div [hidden]="hideRooms">
@@ -9,9 +10,13 @@
     [innerText]="numberOfRooms"></div>
 </div>
 
+<!-- Event binding -->
+<button (click)="toggle()">Toggle</button>
+
+<!-- Structural and Attribute directives Directives -->
 <div *ngIf="rooms.availableRooms > 0">
     Rooms List
-    <table>
+    <table class="table">
         <tr>
             <th>Index</th>
             <th>Even/Odd</th>
@@ -20,6 +25,7 @@
             <th>Room Price</th>
             <th>Room Amenities</th>
             <th>Checkin Time</th>
+            <th>Rating</th>
         </tr>
         <tr 
         [ngClass]="e ? 'even' : 'odd'"
@@ -28,18 +34,18 @@
             <td>{{e ? "Even": "Odd"}}</td>
             <td>{{room.roomNumber}}</td>
             <td>{{room.roomType}}</td>
-            <td>{{room.price}}</td>
-            <td>{{room.amenities}}</td>
-            <td>{{room.checkinTime}}</td>
+            <td>{{room.price | currency :'EUR'}}</td>
+            <td>{{room.amenities | lowercase }}</td>
+            <td>{{room.checkinTime | date :'medium' }}</td>
+            <td>{{room.rating | number: '2.4-5' }}</td>
         </tr>
     </table>
 </div>
 
+<!-- structural directive -->
 <div [ngSwitch]="color">
     <div *ngSwitchCase="'yellow'">yellow</div>
     <div *ngSwitchCase="'red'">red</div>
     <div *ngSwitchCase="'blue'">blue</div>
     <div *ngSwitchDefault>No color is correct</div>
 </div>
-
-<button (click)="toggle()">Toggle</button>

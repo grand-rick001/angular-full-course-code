@@ -25,7 +25,8 @@ export class RoomsComponent implements OnInit{
       price: 500,
       photos: 'https://images.unsplash.com/photo-1505691938895-1758d7feb511?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cm9vbXN8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60',
       checkinTime: new Date('11-Nov-2021'),
-      checkoutTime: new Date('12-Nov-2-21')
+      checkoutTime: new Date('12-Nov-2-21'),
+      rating: 4.5
     },
     {
       roomNumber: 2,
@@ -34,7 +35,8 @@ export class RoomsComponent implements OnInit{
       price: 2000,
       photos: 'https://images.unsplash.com/photo-1505691938895-1758d7feb511?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cm9vbXN8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60',
       checkinTime: new Date('11-Nov-2021'),
-      checkoutTime: new Date('12-Nov-2-21')
+      checkoutTime: new Date('12-Nov-2-21'),
+      rating: 3.4
     },
     {
       roomNumber: 3,
@@ -43,7 +45,8 @@ export class RoomsComponent implements OnInit{
       price: 1500,
       photos: 'https://images.unsplash.com/photo-1505691938895-1758d7feb511?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cm9vbXN8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60',
       checkinTime: new Date('11-Nov-2021'),
-      checkoutTime: new Date('12-Nov-2-21')
+      checkoutTime: new Date('12-Nov-2-21'),
+      rating: 2.6
     }
   ]
 
