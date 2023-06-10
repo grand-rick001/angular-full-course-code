@@ -10,6 +10,7 @@
             <th>Room Amenities</th>
             <th>Checkin Time</th>
             <th>Rating</th>
+            <th>Select Room</th>
         </tr>
         <tr 
         [ngClass]="e ? 'even' : 'odd'"
@@ -22,6 +23,14 @@
             <td>{{room.amenities | lowercase }}</td>
             <td>{{room.checkinTime | date :'medium' }}</td>
             <td>{{room.rating | number: '2.4-5' }}</td>
+            <td>
+                <button 
+                class="btn btn-primary"
+                (click)="selectRoom(room)"
+                >
+                Select
+                </button>
+            </td>
         </tr>
     </table>
 </div>

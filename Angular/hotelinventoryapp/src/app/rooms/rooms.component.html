@@ -4,17 +4,24 @@
 <div [hidden]="hideRooms">
     Number of Rooms
     <div 
-    [ngStyle]="{
-        'color': rooms.availableRooms > 0 ? 'green' : 'red'
-    }"
-    [innerText]="numberOfRooms"></div>
+    [ngStyle]="{'color': rooms.availableRooms > 0 ? 'green' : 'red'}" 
+    [innerText]="numberOfRooms">
+    </div>
 </div>
 
 <!-- Event binding -->
 <button (click)="toggle()">Toggle</button>
 
+<div *ngIf="selectedRoom">
+    {{ selectedRoom | json }}
+</div>
+
+<div>
+    <button class="btn btn-warning" (click)="addRoom()"> Add Room </button>
+</div>
+
 <!-- Structural and Attribute directives Directives -->
-<app-rooms-list [rooms]="roomList"></app-rooms-list>
+<app-rooms-list [rooms]="roomList" (selectedRoom)="selectRoom($event)"></app-rooms-list>
 
 <!-- structural directive -->
 <div [ngSwitch]="color">
