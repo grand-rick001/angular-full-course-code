@@ -1,17 +1,20 @@
-import { Component, OnInit, DoCheck } from '@angular/core';
+import { Component, OnInit, DoCheck, ViewChild, AfterViewInit } from '@angular/core';
 import { Room, RoomList } from './room';
+import { HeaderComponent } from 'src/app/header/header.component';
 
 @Component({
   selector: 'app-rooms',
   templateUrl: './rooms.component.html',
   styleUrls: ['./rooms.component.scss']
 })
-export class RoomsComponent implements OnInit, DoCheck {
+export class RoomsComponent implements OnInit, DoCheck, AfterViewInit {
   hotelName: string = 'Kempinski';
   numberOfRooms: number = 10;
   hideRooms: boolean = false;
   selectedRoom!: RoomList;
   title: string = 'Room List';
+
+  @ViewChild(HeaderComponent, { static: true }) headerComponent!: HeaderComponent;
 
   rooms: Room = {
     totalRooms: 20,
@@ -22,11 +25,12 @@ export class RoomsComponent implements OnInit, DoCheck {
   roomList: RoomList[] = [];
 
   color: string = 'red';
-
+  
   constructor() {}
 
   // Lifecycle hooks: ngOnInit -> Called when the component initializes
   ngOnInit(): void {
+    console.log(this.headerComponent+'HeaderComponent');
     this.roomList = [
       {
         roomNumber: 1,
@@ -63,6 +67,10 @@ export class RoomsComponent implements OnInit, DoCheck {
 
   ngDoCheck(): void {
     console.log('Do check is called');
+  }
+
+  ngAfterViewInit() {
+    console.log(this.headerComponent+'HeaderComponent');
   }
 
   toggle(): void {
