@@ -11,6 +11,7 @@ export class RoomsComponent implements OnInit{
   numberOfRooms: number = 10;
   hideRooms: boolean = false;
   selectedRoom!: RoomList;
+  title: string = 'Room List';
 
   rooms: Room = {
     totalRooms: 20,
@@ -62,6 +63,7 @@ export class RoomsComponent implements OnInit{
 
   toggle(): void {
     this.hideRooms = !this.hideRooms;
+    this.title = "Rooms List";
   }
 
   selectRoom(room: RoomList) {
@@ -80,6 +82,8 @@ export class RoomsComponent implements OnInit{
       checkoutTime: new Date('12-Nov-2-21'),
       rating: 4.5
     }
-    this.roomList.push(room);
+    // this.roomList.push(room);
+
+    this.roomList = [...this.roomList, room];
   }
 }

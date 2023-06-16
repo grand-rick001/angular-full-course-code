@@ -21,7 +21,7 @@
 </div>
 
 <!-- Structural and Attribute directives Directives -->
-<app-rooms-list [rooms]="roomList" (selectedRoom)="selectRoom($event)"></app-rooms-list>
+<app-rooms-list [rooms]="roomList" [title]="title" (selectedRoom)="selectRoom($event)"></app-rooms-list>
 
 <!-- structural directive -->
 <div [ngSwitch]="color">
