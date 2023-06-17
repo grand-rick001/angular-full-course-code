@@ -1,4 +1,4 @@
-import { Component, OnInit, DoCheck, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, DoCheck, ViewChild, ViewChildren, AfterViewInit, AfterViewChecked, QueryList } from '@angular/core';
 import { Room, RoomList } from './room';
 import { HeaderComponent } from 'src/app/header/header.component';
 
@@ -7,14 +7,15 @@ import { HeaderComponent } from 'src/app/header/header.component';
   templateUrl: './rooms.component.html',
   styleUrls: ['./rooms.component.scss']
 })
-export class RoomsComponent implements OnInit, DoCheck, AfterViewInit {
+export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterViewChecked {
   hotelName: string = 'Kempinski';
   numberOfRooms: number = 10;
   hideRooms: boolean = false;
   selectedRoom!: RoomList;
   title: string = 'Room List';
 
-  @ViewChild(HeaderComponent, { static: true }) headerComponent!: HeaderComponent;
+  @ViewChild(HeaderComponent) headerComponent!: HeaderComponent;
+  @ViewChildren(HeaderComponent) headerChildrenComponent!: QueryList<HeaderComponent>;
 
   rooms: Room = {
     totalRooms: 20,
@@ -25,12 +26,12 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit {
   roomList: RoomList[] = [];
 
   color: string = 'red';
-  
-  constructor() {}
+
+  constructor() { }
 
   // Lifecycle hooks: ngOnInit -> Called when the component initializes
   ngOnInit(): void {
-    console.log(this.headerComponent+'HeaderComponent');
+    // console.log(this.headerComponent+'HeaderComponent');
     this.roomList = [
       {
         roomNumber: 1,
@@ -69,8 +70,18 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit {
     console.log('Do check is called');
   }
 
-  ngAfterViewInit() {
-    console.log(this.headerComponent+'HeaderComponent');
+  ngAfterViewInit(): void {
+    // console.log(+'HeaderComponent');
+  }
+
+  ngAfterViewChecked(): void {
+    this.headerComponent.title = 'Rooms View';
+    this.headerChildrenComponent.forEach((header => {
+      header.title = 'ROOMS VIEWS TITLE';
+    }));
+
+    this.headerChildrenComponent.first.title = 'FIRST';
+    this.headerChildrenComponent.last.title = 'LAST';
   }
 
   toggle(): void {
