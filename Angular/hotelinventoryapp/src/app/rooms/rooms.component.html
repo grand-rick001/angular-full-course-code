@@ -2,17 +2,20 @@
 <!-- <h1>Welcome to {{hotelName}}</h1> -->
 
 <app-header></app-header>
+<!-- <app-header></app-header>
 <app-header></app-header>
 <app-header></app-header>
-<app-header></app-header>
-<app-header></app-header>
+<app-header></app-header> -->
 
-<div [hidden]="hideRooms">
-    Number of Rooms
-    <div 
-    [ngStyle]="{'color': rooms.availableRooms > 0 ? 'green' : 'red'}" 
-    [innerText]="numberOfRooms">
-    </div>
+Number of Rooms
+<div 
+[ngStyle]="{'color': rooms.availableRooms > 0 ? 'green' : 'red'}" 
+[innerText]="numberOfRooms">
+</div>
+
+<div *ngIf="hideRooms">
+    <!-- Structural and Attribute directives Directives -->
+    <app-rooms-list [rooms]="roomList" [title]="title" (selectedRoom)="selectRoom($event)"></app-rooms-list>
 </div>
 
 <!-- Event binding -->
@@ -25,9 +28,6 @@
 <div>
     <button class="btn btn-warning" (click)="addRoom()"> Add Room </button>
 </div>
-
-<!-- Structural and Attribute directives Directives -->
-<app-rooms-list [rooms]="roomList" [title]="title" (selectedRoom)="selectRoom($event)"></app-rooms-list>
 
 <!-- structural directive -->
 <div [ngSwitch]="color">

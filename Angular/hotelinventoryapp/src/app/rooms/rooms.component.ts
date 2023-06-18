@@ -67,7 +67,7 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
   }
 
   ngDoCheck(): void {
-    console.log('Do check is called');
+    // console.log('Do check is called');
   }
 
   ngAfterViewInit(): void {
