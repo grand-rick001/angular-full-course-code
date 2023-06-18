@@ -1,4 +1,4 @@
-import { Component, OnInit, DoCheck, ViewChild, ViewChildren, AfterViewInit, AfterViewChecked, QueryList } from '@angular/core';
+import { Component, OnInit, DoCheck, ViewChild, ViewChildren, AfterViewInit, AfterViewChecked, QueryList, SkipSelf } from '@angular/core';
 import { Room, RoomList } from './room';
 import { HeaderComponent } from 'src/app/header/header.component';
 import { RoomsService } from '../services/rooms.service';
@@ -28,7 +28,7 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
 
   color: string = 'red';
 
-  constructor(private roomsService: RoomsService) { }
+  constructor(@SkipSelf() private roomsService: RoomsService) { }
 
   // Lifecycle hooks: ngOnInit -> Called when the component initializes
   ngOnInit(): void {

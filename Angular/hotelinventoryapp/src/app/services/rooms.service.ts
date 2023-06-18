@@ -39,7 +39,9 @@ export class RoomsService {
     }
   ]
 
-  constructor() { }
+  constructor() {
+    console.log('Rooms Service is Initialized');
+   }
 
   getRooms():RoomList[] {
     return this.roomList;
