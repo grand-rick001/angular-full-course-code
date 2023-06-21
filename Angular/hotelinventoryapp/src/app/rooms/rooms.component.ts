@@ -34,6 +34,7 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
   ngOnInit(): void {
     // console.log(this.headerComponent+'HeaderComponent');
     this.roomList = this.roomsService.getRooms();
+    // console.log(this.roomsService.configEndpoint);
   }
 
   ngDoCheck(): void {

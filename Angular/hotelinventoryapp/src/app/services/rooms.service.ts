@@ -47,6 +47,10 @@ export class RoomsService {
     console.log(this.config.apiEndpoint);
    }
 
+   get configEndpoint(): string {
+    return this.config.apiEndpoint;
+   }
+
   getRooms():RoomList[] {
     return this.roomList;
   }
