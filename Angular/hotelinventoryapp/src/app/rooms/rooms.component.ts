@@ -33,7 +33,7 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
   // Lifecycle hooks: ngOnInit -> Called when the component initializes
   ngOnInit(): void {
     // console.log(this.headerComponent+'HeaderComponent');
-    this.roomList = this.roomsService.getRooms();
+    this.roomsService.getRooms().subscribe(rooms => this.roomList = rooms);
     // console.log(this.roomsService.configEndpoint);
   }
 
