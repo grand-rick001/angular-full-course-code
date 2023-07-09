@@ -3,7 +3,7 @@ import { RoomList } from '../rooms/room';
 import { APP_SERVICE_CONFIG, APP_CONFIG } from 'src/app/AppConfig/appconfig.service';
 import { AppConfig } from 'src/app/AppConfig/appconfig.interface';
 import { HttpClient, HttpRequest } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, shareReplay } from 'rxjs';
 
 export interface Photo {
   albumId: number;
@@ -29,6 +29,10 @@ export class RoomsService {
     // console.log('Rooms Service is Initialized');
     // console.log(this.configEndpoint);
    }
+
+   getRooms$ = this.http.get<RoomList[]>('/api/rooms').pipe(
+    shareReplay(1)
+   );
 
    get configEndpoint(): string {
     return this.config.apiEndpoint;

@@ -8,13 +8,13 @@ import { RoomsService } from 'src/app/services/rooms.service';
   selector: 'app-container',
   templateUrl: './container.component.html',
   styleUrls: ['./container.component.scss'],
-  providers: [RoomsService]
+  // providers: [RoomsService]
 })
 export class ContainerComponent implements AfterContentInit {
   @ContentChild(EmployeeComponent) employee!: EmployeeComponent;
   // @ContentChild(RoomsComponent) rooms!: RoomsComponent;
 
-  constructor(@Host() private roomsService: RoomsService) {}
+  constructor() {}
 
   ngAfterContentInit(): void {
     // console.log(this.rooms);
