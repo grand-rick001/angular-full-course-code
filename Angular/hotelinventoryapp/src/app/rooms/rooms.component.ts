@@ -12,7 +12,7 @@ import {
 import { Room, RoomList } from './room';
 import { HeaderComponent } from 'src/app/header/header.component';
 import { RoomsService } from '../services/rooms.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { HttpEventType } from '@angular/common/http';
 
 @Component({
@@ -27,6 +27,8 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
   selectedRoom!: RoomList;
   title: string = 'Room List';
   totalBytes: number = 0;
+  subscription: Subscription = new Subscription();
+  rooms$ = this.roomsService.getRooms$;
   
   stream = new Observable<number>((observer) => {
     for (let i = 0, n = 20; i < n; i++) {
@@ -85,7 +87,7 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
     // });
     // this.stream.subscribe(data => console.log(data));
     // console.log(this.headerComponent+'HeaderComponent');
-    this.roomsService.getRooms$.subscribe(rooms => this.roomList = rooms);
+    // this.subscription = this.roomsService.getRooms$.subscribe(rooms => this.roomList = rooms);
     // console.log(this.roomsService.configEndpoint);
   }
 
@@ -150,5 +152,11 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
 
   deleteRoom(): void {
     this.roomsService.deleteRoom('4ce6f444-02a0-44b4-b9e3-65864bdcf88c').subscribe(rooms => this.roomList = rooms);
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }

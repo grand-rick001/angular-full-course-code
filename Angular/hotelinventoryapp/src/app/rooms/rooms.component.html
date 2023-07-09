@@ -7,6 +7,8 @@
 <app-header></app-header>
 <app-header></app-header> -->
 
+<!-- {{rooms$ | async | json}} -->
+
 Number of Rooms
 <div 
 [ngStyle]="{'color': rooms.availableRooms > 0 ? 'green' : 'red'}" 
@@ -32,9 +34,9 @@ Number of Rooms
     <button class="btn btn-warning" (click)="addRoom()"> Add Room </button>
 </div>
 
-<div *ngIf="hideRooms">
+<div *ngIf="rooms$ | async as rooms">
     <!-- Structural and Attribute directives Directives -->
-    <app-rooms-list [rooms]="roomList" [title]="title" (selectedRoom)="selectRoom($event)"></app-rooms-list>
+    <app-rooms-list [rooms]="rooms" [title]="title" (selectedRoom)="selectRoom($event)"></app-rooms-list>
 </div>
 
 <!-- structural directive -->
