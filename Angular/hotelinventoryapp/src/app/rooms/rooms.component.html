@@ -34,6 +34,10 @@ Number of Rooms
     <button class="btn btn-warning" (click)="addRoom()"> Add Room </button>
 </div>
 
+<h1>
+    {{ getError$ | async | json }}
+</h1>
+
 <div *ngIf="rooms$ | async as rooms">
     <!-- Structural and Attribute directives Directives -->
     <app-rooms-list [rooms]="rooms" [title]="title" (selectedRoom)="selectRoom($event)"></app-rooms-list>

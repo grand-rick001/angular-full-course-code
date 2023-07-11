@@ -12,7 +12,7 @@ import {
 import { Room, RoomList } from './room';
 import { HeaderComponent } from 'src/app/header/header.component';
 import { RoomsService } from '../services/rooms.service';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subject, Subscription, catchError, of } from 'rxjs';
 import { HttpEventType } from '@angular/common/http';
 
 @Component({
@@ -28,7 +28,15 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
   title: string = 'Room List';
   totalBytes: number = 0;
   subscription: Subscription = new Subscription();
-  rooms$ = this.roomsService.getRooms$;
+  rooms$ = this.roomsService.getRooms$.pipe(
+    catchError((err) => {
+      console.log(err);
+      this.error$.next(err.message);
+      return of([]);
+    })
+  );
+  error$: Subject<string> = new Subject();
+  getError$ = this.error$.asObservable();
   
   stream = new Observable<number>((observer) => {
     for (let i = 0, n = 20; i < n; i++) {
