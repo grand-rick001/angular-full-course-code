@@ -35,8 +35,11 @@ Number of Rooms
 </div>
 
 <h1>
-    {{ getError$ | async | json }}
+    <!-- {{ getError$ | async | json }} -->
+    Number of Rooms: {{ roomsCount$ | async }}
 </h1>
+
+
 
 <div *ngIf="rooms$ | async as rooms">
     <!-- Structural and Attribute directives Directives -->

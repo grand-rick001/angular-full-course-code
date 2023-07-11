@@ -12,7 +12,7 @@ import {
 import { Room, RoomList } from './room';
 import { HeaderComponent } from 'src/app/header/header.component';
 import { RoomsService } from '../services/rooms.service';
-import { Observable, Subject, Subscription, catchError, of } from 'rxjs';
+import { Observable, Subject, Subscription, catchError, map, of } from 'rxjs';
 import { HttpEventType } from '@angular/common/http';
 
 @Component({
@@ -21,6 +21,9 @@ import { HttpEventType } from '@angular/common/http';
   styleUrls: ['./rooms.component.scss']
 })
 export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterViewChecked {
+  @ViewChild(HeaderComponent) headerComponent!: HeaderComponent;
+  @ViewChildren(HeaderComponent) headerChildrenComponent!: QueryList<HeaderComponent>;
+
   hotelName: string = 'Kempinski';
   numberOfRooms: number = 10;
   hideRooms: boolean = true;
@@ -37,7 +40,10 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
   );
   error$: Subject<string> = new Subject();
   getError$ = this.error$.asObservable();
-  
+  roomsCount$ = this.roomsService.getRooms$.pipe(
+    map((rooms) => rooms.length)
+  )
+
   stream = new Observable<number>((observer) => {
     for (let i = 0, n = 20; i < n; i++) {
       observer.next(i + 1);
@@ -46,17 +52,12 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
     observer.error('Error');
   });
 
-  @ViewChild(HeaderComponent) headerComponent!: HeaderComponent;
-  @ViewChildren(HeaderComponent) headerChildrenComponent!: QueryList<HeaderComponent>;
-
   rooms: Room = {
     totalRooms: 20,
     availableRooms: 10,
     bookedRooms: 5
   }
-
   roomList: RoomList[] = [];
-
   color: string = 'red';
 
   constructor(@SkipSelf() private roomsService: RoomsService) { }
