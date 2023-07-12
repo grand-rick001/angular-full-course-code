@@ -1,32 +1,52 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+
+export interface UserProfile {
+  name: string;
+  age: number;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class ToolsService {
-  private counterSubject = new Subject<number>();
-  private counter = 0;
+  private userProfileSubject = new BehaviorSubject<UserProfile>({
+    name: 'Guest',
+    age: 0,
+  });
 
-  constructor() {
-    this.counterSubject.subscribe((value) => {
-      this.counter = value;
-    });
+  constructor() {}
+  
+  updateUserProfile(newProfile: UserProfile) {
+    this.userProfileSubject.next(newProfile);
   }
 
-  increment() {
-    this.counterSubject.next(this.counter + 1);
+  getUserProfile() {
+    return this.userProfileSubject.asObservable();
   }
 
-  decrement() {
-    this.counterSubject.next(this.counter - 1);
-  }
+  // private counterSubject = new Subject<number>();
+  // private counter = 0;
 
-  getCounter(): number {
-    return this.counter;
-  }
+  // constructor() {
+  //   this.counterSubject.subscribe((value) => {
+  //     this.counter = value;
+  //   });
+  // }
 
-  getCounterSubject(): Observable<number> {
-    return this.counterSubject.asObservable();
-  }
+  // increment() {
+  //   this.counterSubject.next(this.counter + 1);
+  // }
+
+  // decrement() {
+  //   this.counterSubject.next(this.counter - 1);
+  // }
+
+  // getCounter(): number {
+  //   return this.counter;
+  // }
+
+  // getCounterSubject(): Observable<UserProfile> {
+  //   return this.userProfileSubject.asObservable();
+  // }
 }

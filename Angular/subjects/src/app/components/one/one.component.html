@@ -1,4 +1,7 @@
-<div>
-    <button (click)="increment()">Increment Counter</button>
-    <button (click)="decrement()">Decrement Counter</button>
-</div>
+<section>
+    <form action="" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+        <input type="text" name="name" placeholder="Enter your name" formControlName="name" >
+        <input type="number" name="age" placeholder="Enter your age" formControlName="age">
+        <button [disabled]="userForm.invalid">Submit</button>
+    </form>
+</section>
