@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ToolsService, UserProfile } from 'src/app/services/tools.service';
+import { ToolsService, UserProfile, ChatMessage } from 'src/app/services/tools.service';
 
 @Component({
   selector: 'app-one',
@@ -10,9 +10,9 @@ import { ToolsService, UserProfile } from 'src/app/services/tools.service';
 export class OneComponent {
   name: string = '';
   age: number = 0;
-  userForm: FormGroup = this.fb.group({
-    name: [null, Validators.required],
-    age: [null, Validators.required],
+  chatForm: FormGroup = this.fb.group({
+    text: [null, Validators.required],
+    date: [null, Validators.required],
   });
   // userForm: FormGroup = new FormGroup({
   //   name: new FormControl(null, Validators.required),
@@ -26,8 +26,8 @@ export class OneComponent {
     //   name: this.name,
     //   age: this.age,
     // };
-    this.toolsService.updateUserProfile(this.userForm.value);
-    console.log(this.userForm.value);
+    this.toolsService.addMessage(this.chatForm.value);
+    // console.log(this.chatForm.value);
   }
 
 }
