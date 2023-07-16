@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { RoomList } from '../rooms/room';
 import { APP_SERVICE_CONFIG, APP_CONFIG } from 'src/app/AppConfig/appconfig.service';
 import { AppConfig } from 'src/app/AppConfig/appconfig.interface';
-import { HttpClient, HttpRequest } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Observable, shareReplay } from 'rxjs';
 
 export interface Photo {
@@ -30,7 +30,11 @@ export class RoomsService {
     // console.log(this.configEndpoint);
    }
 
-   getRooms$ = this.http.get<RoomList[]>('/api/rooms').pipe(
+  headers = new HttpHeaders({'token1': '12345dksdks'}).append('token2', '12345dksdks').append('token3', '12345dksdks');
+
+   getRooms$ = this.http.get<RoomList[]>('/api/rooms', {
+    headers: this.headers
+   }).pipe(
     shareReplay(1)
    );
 
