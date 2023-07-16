@@ -30,11 +30,9 @@ export class RoomsService {
     // console.log(this.configEndpoint);
    }
 
-  headers = new HttpHeaders({'token1': '12345dksdks'}).append('token2', '12345dksdks').append('token3', '12345dksdks');
+  // headers = new HttpHeaders({'token1': '12345dksdks'}).append('token2', '12345dksdks').append('token3', '12345dksdks');
 
-   getRooms$ = this.http.get<RoomList[]>('/api/rooms', {
-    headers: this.headers
-   }).pipe(
+   getRooms$ = this.http.get<RoomList[]>('/api/rooms').pipe(
     shareReplay(1)
    );
 

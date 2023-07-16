@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,7 +11,7 @@ import { ContainerComponent } from './container/container.component';
 import { EmployeeComponent } from './container/employee/employee.component';
 
 import { APP_SERVICE_CONFIG, APP_CONFIG } from './AppConfig/appconfig.service';
-
+import { RequestInterceptor } from 'src/app/interceptors/request.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,6 +30,11 @@ import { APP_SERVICE_CONFIG, APP_CONFIG } from './AppConfig/appconfig.service';
     {
       provide: APP_SERVICE_CONFIG,
       useValue: APP_CONFIG
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: RequestInterceptor,
+      multi: true
     }
   ],
   bootstrap: [AppComponent]
