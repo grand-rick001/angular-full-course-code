@@ -18,6 +18,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { NotfoundComponent } from './notfound/notfound.component';
 
 function initFactory(initService: InitService) {
   return () => initService.init();
@@ -31,7 +32,8 @@ function initFactory(initService: InitService) {
     HeaderComponent,
     ContainerComponent,
     EmployeeComponent,
-    AppNavComponent
+    AppNavComponent,
+    NotfoundComponent
   ],
   imports: [
     BrowserModule,
