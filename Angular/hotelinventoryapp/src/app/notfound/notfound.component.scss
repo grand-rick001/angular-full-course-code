@@ -2,3 +2,18 @@ h1 {
     font-size: 1.5em;
     color: red;
 }
+
+.err-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    height: 100vh;
+    width: 100%;
+    padding: 2%;
+    // background: url('../../assets/blob.svg') no-repeat;
+    // background-position: 120% 100%;
+}
+
+.err-img-container {
+    // Desktop 50%, Mobile 100%
+}
