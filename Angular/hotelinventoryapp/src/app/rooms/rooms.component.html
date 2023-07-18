@@ -41,9 +41,13 @@ Number of Rooms
 
 
 
-<div *ngIf="rooms$ | async as rooms">
+<!-- <div *ngIf="rooms$ | async as rooms"> -->
     <!-- Structural and Attribute directives Directives -->
-    <app-rooms-list [rooms]="rooms" [title]="title" (selectedRoom)="selectRoom($event)"></app-rooms-list>
+    <!-- <app-rooms-list [rooms]="rooms" [title]="title" (selectedRoom)="selectRoom($event)"></app-rooms-list>
+</div> -->
+<div *ngIf="roomList.length">
+    <!-- Structural and Attribute directives Directives -->
+    <app-rooms-list [rooms]="roomList" [title]="title" (selectedRoom)="selectRoom($event)"></app-rooms-list>
 </div>
 
 <!-- structural directive -->

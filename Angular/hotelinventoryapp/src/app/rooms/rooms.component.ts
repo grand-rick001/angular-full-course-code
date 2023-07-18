@@ -64,6 +64,7 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
 
   // Lifecycle hooks: ngOnInit -> Called when the component initializes
   ngOnInit(): void {
+    this.roomsService.getRooms().subscribe(rooms => this.roomList = rooms);
     this.roomsService.getPhotos().subscribe((event) => {
       console.log(event);
 
@@ -160,7 +161,8 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
   }
 
   deleteRoom(): void {
-    this.roomsService.deleteRoom('4ce6f444-02a0-44b4-b9e3-65864bdcf88c').subscribe(rooms => this.roomList = rooms);
+    const randomRoomNumber: string = this.roomList[Math.floor(Math.random() * this.roomList.length)].roomNumber as unknown as string;
+    this.roomsService.deleteRoom(randomRoomNumber);
   }
 
   ngOnDestroy(): void {
