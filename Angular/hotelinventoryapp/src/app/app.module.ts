@@ -20,6 +20,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { RoomsBookingComponent } from './rooms/rooms-booking/rooms-booking.component';
+import { RoomsAddComponent } from './rooms/rooms-add/rooms-add.component';
+import { FormsModule } from '@angular/forms';
 
 function initFactory(initService: InitService) {
   return () => initService.init();
@@ -35,7 +37,8 @@ function initFactory(initService: InitService) {
     EmployeeComponent,
     AppNavComponent,
     NotfoundComponent,
-    RoomsBookingComponent
+    RoomsBookingComponent,
+    RoomsAddComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +49,8 @@ function initFactory(initService: InitService) {
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    FormsModule
   ],
   providers: [
     {

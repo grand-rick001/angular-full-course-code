@@ -9,9 +9,7 @@ import { Observable, map } from 'rxjs';
 })
 export class RoomsBookingComponent implements OnInit {
 
-  id$: Observable<string> = this.router.paramMap.pipe(
-    map((params: ParamMap) => params.get('id')!)
-  );
+  id$: Observable<string> = this.router.paramMap.pipe(map((params: ParamMap) => params.get('id')!));
   
   constructor (private router: ActivatedRoute) {}
 
