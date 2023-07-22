@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RoomList } from '../room';
 import { RoomsService } from 'src/app/services/rooms.service';
 import { tap } from 'rxjs/operators';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-rooms-add',
@@ -23,14 +24,16 @@ export class RoomsAddComponent {
 
   constructor(private roomsService: RoomsService) { }
 
-  AddRoom() {
+  AddRoom(roomsForm: NgForm) {
     this.roomsService.addRoom(this.room)
-      .pipe(
-        tap((data: any) => console.log(data))
-      )
       .subscribe((data: any) => {
         this.successMessage = 'Room added successfully';
+        roomsForm.reset();
       })
+
+    setTimeout(() => {
+      this.successMessage = '';
+    }, 3000);
   }
 
 }
