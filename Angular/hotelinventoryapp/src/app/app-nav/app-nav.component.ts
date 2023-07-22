@@ -13,7 +13,7 @@ export class AppNavComponent {
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
-      map(result => result.matches),
+      map((result: { matches: any; }) => result.matches),
       shareReplay()
     );
 }

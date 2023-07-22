@@ -41,10 +41,10 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
   error$: Subject<string> = new Subject();
   getError$ = this.error$.asObservable();
   roomsCount$ = this.roomsService.getRooms$.pipe(
-    map((rooms) => rooms.length)
+    map((rooms: string | any[]) => rooms.length)
   )
 
-  stream = new Observable<number>((observer) => {
+  stream = new Observable<number>((observer: { next: (arg0: number) => void; complete: () => void; error: (arg0: string) => void; }) => {
     for (let i = 0, n = 20; i < n; i++) {
       observer.next(i + 1);
     }
@@ -64,8 +64,8 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
 
   // Lifecycle hooks: ngOnInit -> Called when the component initializes
   ngOnInit(): void {
-    this.roomsService.getRooms().subscribe(rooms => this.roomList = rooms);
-    this.roomsService.getPhotos().subscribe((event) => {
+    this.roomsService.getRooms().subscribe((rooms: RoomList[]) => this.roomList = rooms);
+    this.roomsService.getPhotos().subscribe((event: { type: any; loaded: number; body: any; }) => {
       console.log(event);
 
       switch (event.type) {
@@ -143,7 +143,7 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
     // this.roomList.push(room);
 
     // this.roomList = [...this.roomList, room];
-    this.roomsService.addRoom(room).subscribe(rooms => this.roomList = rooms);
+    this.roomsService.addRoom(room).subscribe((rooms: RoomList[]) => this.roomList = rooms);
   }
 
   editRoom(): void {
@@ -157,7 +157,7 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
       checkoutTime: new Date('12-Nov-2-21'),
       rating: 4.5
     }
-    this.roomsService.editRoom(room).subscribe(rooms => this.roomList = rooms);
+    this.roomsService.editRoom(room).subscribe((rooms: RoomList[]) => this.roomList = rooms);
   }
 
   deleteRoom(): void {

@@ -26,9 +26,9 @@ export class RoomsAddComponent {
   AddRoom() {
     this.roomsService.addRoom(this.room)
       .pipe(
-        tap(data => console.log(data))
+        tap((data: any) => console.log(data))
       )
-      .subscribe(data => {
+      .subscribe((data: any) => {
         this.successMessage = 'Room added successfully';
       })
   }
