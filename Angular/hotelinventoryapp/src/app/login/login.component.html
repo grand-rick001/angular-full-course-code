@@ -1,6 +1,9 @@
 <form action="" (ngSubmit)="login()">
     <div class="form-group">
-        <input appHover="green" type="email" name="email" [(ngModel)]="email" placeholder="Provide your user email" />
+        <input #emailControl="ngModel" appEmailvalidator appHover="green" type="email" name="email" [(ngModel)]="email" placeholder="Provide your user email" />
+    </div>
+    <div>
+        {{ emailControl.errors | json }}
     </div>
     <div class="form-group">
         <input appHover="steelblue" type="password" name="password" [(ngModel)]="password" placeholder="Enter your password" />
