@@ -67,7 +67,6 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
     this.roomsService.getRooms().subscribe((rooms: RoomList[]) => this.roomList = rooms);
     this.roomsService.getPhotos().subscribe((event: any) => {
       console.log(event);
-      console.log(event);
 
       switch (event.type) {
         case HttpEventType.Sent: {
