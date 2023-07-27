@@ -4,7 +4,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ContainerComponent } from './container/container.component';
-import { EmployeeComponent } from './container/employee/employee.component';
+// import { EmployeeComponent } from './container/employee/employee.component';
 import { APP_SERVICE_CONFIG, APP_CONFIG } from './AppConfig/appconfig.service';
 import { RequestInterceptor } from 'src/app/interceptors/request.interceptor';
 import { InitService } from 'src/app/services/init.service';
@@ -19,7 +19,7 @@ import { NotfoundComponent } from './notfound/notfound.component';
 import { LoginComponent } from './login/login.component';
 import { HoverDirective } from './directives/hover.directive';
 import { EmailvalidatorDirective } from './emailValidator/emailvalidator.directive';
-import { RoomsModule } from './rooms/rooms.module';
+// import { RoomsModule } from './rooms/rooms.module';
 import { HeaderModule } from './header/header.module';
 import { FormsModule } from '@angular/forms';
 
@@ -31,7 +31,7 @@ function initFactory(initService: InitService) {
   declarations: [
     AppComponent,
     ContainerComponent,
-    EmployeeComponent,
+    // EmployeeComponent,
     AppNavComponent,
     NotfoundComponent,
     LoginComponent,
@@ -40,7 +40,7 @@ function initFactory(initService: InitService) {
   ],
   imports: [
     BrowserModule,
-    RoomsModule,
+    // RoomsModule,
     HttpClientModule,
     BrowserAnimationsModule,
     MatToolbarModule,

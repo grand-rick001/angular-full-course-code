@@ -1,14 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { EmployeeComponent } from './container/employee/employee.component';
+// import { EmployeeComponent } from './container/employee/employee.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { LoginComponent } from './login/login.component';
 
 
 const routes: Routes = [
-  { path: 'employee', component: EmployeeComponent },
+  { 
+    path: 'employee',
+      loadChildren: () => 
+        import('./container/employee/employee.module').then(m => m.EmployeeModule)
+  },
   { path: 'login', component: LoginComponent },
-  { path: '', redirectTo: '/rooms', pathMatch: 'full' },
+  { path: 'rooms', 
+    loadChildren: () => 
+      import('./rooms/rooms.module').then(m => m.RoomsModule) },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', component: NotfoundComponent }
 ];
 
