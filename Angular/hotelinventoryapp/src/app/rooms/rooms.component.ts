@@ -14,6 +14,7 @@ import { HeaderComponent } from 'src/app/header/header.component';
 import { RoomsService } from '../services/rooms.service';
 import { Observable, Subject, Subscription, catchError, map, of } from 'rxjs';
 import { HttpEventType } from '@angular/common/http';
+import { ConfigService } from '../services/config.service';
 
 @Component({
   selector: 'app-rooms',
@@ -60,7 +61,7 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
   roomList: RoomList[] = [];
   color: string = 'red';
 
-  constructor(@SkipSelf() private roomsService: RoomsService) { }
+  constructor(@SkipSelf() private roomsService: RoomsService, private configService: ConfigService) { }
 
   // Lifecycle hooks: ngOnInit -> Called when the component initializes
   ngOnInit(): void {

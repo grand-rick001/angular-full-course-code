@@ -3,6 +3,7 @@ import { RoomsComponent } from './rooms/rooms.component';
 import { LoggerService } from 'src/app/services/logger.service';
 import { localStorageToken } from 'src/app/token/localstorage.token';
 import { InitService } from 'src/app/services/init.service';
+import { ConfigService } from './services/config.service';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,8 @@ export class AppComponent implements OnInit {
   constructor(
     @Optional() private loggerService: LoggerService,
     @Inject(localStorageToken) private localStorageToken: Storage,
-    private initService: InitService
+    private initService: InitService,
+    private configService: ConfigService
     ) {
       console.log(this.initService.config);
     }
@@ -24,7 +26,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.loggerService?.log('AppComponent.ngOnInit()');
-    this.name.nativeElement.innerText = "Hilton Hotels";
+    // this.name.nativeElement.innerText = "Hilton Hotels";
 
     this.localStorageToken.setItem('name', 'Hilton Hotel');
   }

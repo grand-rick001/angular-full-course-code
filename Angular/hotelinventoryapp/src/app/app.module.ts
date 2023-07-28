@@ -22,6 +22,7 @@ import { EmailvalidatorDirective } from './emailValidator/emailvalidator.directi
 // import { RoomsModule } from './rooms/rooms.module';
 import { HeaderModule } from './header/header.module';
 import { FormsModule } from '@angular/forms';
+import { RouteConfigToken } from './services/routeConfig.service';
 
 function initFactory(initService: InitService) {
   return () => initService.init();
@@ -67,6 +68,12 @@ function initFactory(initService: InitService) {
       useFactory: initFactory,
       deps: [InitService],
       multi: true
+    },
+    {
+      provide: RouteConfigToken,
+      useValue: {
+        title: 'Home'
+      }
     }
   ],
   bootstrap: [AppComponent]
