@@ -3,10 +3,10 @@ import { CanActivateFn, CanLoad, CanLoadFn, Router } from '@angular/router';
 
 
 export const loginGuard: CanActivateFn = (route, state) => {
-  const token = localStorage.getItem('token');
+  const role = localStorage.getItem('role');
   const router = inject(Router);
   
-  if (token) {
+  if (role === 'ADMIN' || role === 'USER') {
     return true;
   } else {
     router.navigate(['login']);
@@ -15,10 +15,10 @@ export const loginGuard: CanActivateFn = (route, state) => {
 };
 
 export const loadGuard: CanLoadFn = (route, segments) => {
-  const token = localStorage.getItem('token');
+  const role = localStorage.getItem('role');
   const router = inject(Router);
   
-  if (token) {
+  if (role === 'ADMIN' || role === 'USER') {
     return true;
   } else {
     router.navigate(['login']);

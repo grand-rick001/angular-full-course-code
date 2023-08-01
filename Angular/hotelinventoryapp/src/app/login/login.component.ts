@@ -17,7 +17,10 @@ export class LoginComponent implements OnInit {
 
   login(): void {
     if (this.email === "admin@gmail.com" && this.password ==="Admin") {
-      localStorage.setItem('token', crypto.randomUUID());
+      localStorage.setItem('role', 'ADMIN');
+      this.router.navigate(['employee']);
+    } else if (this.email === "user@gmail.com" && this.password ==="User") {
+      localStorage.setItem('role', 'USER');
       this.router.navigate(['employee']);
     } 
   }
