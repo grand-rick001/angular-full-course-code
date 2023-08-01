@@ -1,4 +1,5 @@
 import { Component, Self } from '@angular/core';
+import { Router } from '@angular/router';
 // import { RoomsService } from 'src/app/services/rooms.service';
 
 @Component({
@@ -9,8 +10,13 @@ import { Component, Self } from '@angular/core';
 })
 export class EmployeeComponent {
   name: string = 'John';
-  constructor() { }
+  constructor(private router: Router) { }
   // constructor(@Self() private roomSService: RoomsService) { }
 
   ngOnInit(): void {}
+
+  logOut(): void {
+    localStorage.removeItem('token');
+    this.router.navigate(['login']);
+  }
 }

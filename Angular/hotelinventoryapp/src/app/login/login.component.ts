@@ -11,14 +11,15 @@ export class LoginComponent implements OnInit {
   email: string = '';
   password: string = '';
 
-  constructor (private route: Router) {}
+  constructor (private router: Router) {}
 
   ngOnInit(): void {}
 
   login(): void {
     if (this.email === "admin@gmail.com" && this.password ==="Admin") {
-      this.route.navigateByUrl('/rooms/add');
-    }
+      localStorage.setItem('token', crypto.randomUUID());
+      this.router.navigate(['employee']);
+    } 
   }
 
 }
