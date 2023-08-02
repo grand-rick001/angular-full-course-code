@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 // import { EmployeeComponent } from './container/employee/employee.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { LoginComponent } from './login/login.component';
-import { loadGuard, loginGuard } from './guards/login.guard';
+import { loginGuard } from './guards/login.guard';
 
 
 const routes: Routes = [
@@ -11,7 +11,7 @@ const routes: Routes = [
     path: 'employee',
       loadChildren: () => 
         import('./container/employee/employee.module').then(m => m.EmployeeModule),
-    canActivate: [loginGuard]
+    canMatch: [loginGuard]
   },
   { 
     path: 'login',
@@ -20,14 +20,13 @@ const routes: Routes = [
   { path: 'rooms', 
     loadChildren: () => 
       import('./rooms/rooms.module').then(m => m.RoomsModule),
-    canActivate: [loginGuard],
-    canLoad: [loadGuard]
+    canMatch: [loginGuard]
   },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { 
     path: 'booking',
     loadChildren: () => import('./booking/booking.module').then(m => m.BookingModule),
-    canActivate: [loginGuard]
+    canMatch: [loginGuard]
   },
   { path: '**', component: NotfoundComponent }
 ];
