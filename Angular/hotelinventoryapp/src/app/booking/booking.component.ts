@@ -33,10 +33,7 @@ export class BookingComponent {
         zipCode: ['']
       }),
       guests: this.fb.array([
-        this.fb.group({
-        guestName: [''],
-        age: new FormControl('')
-        })
+        this.addGuestControl()
       ])
     });
   }
@@ -50,10 +47,9 @@ export class BookingComponent {
   }
 
   addGuest() {
-    this.guests.push(this.fb.group({
-      guestName: [''],
-      age: new FormControl('')
-    }));
+    this.guests.push(
+      this.addGuestControl()
+    );
   }
 
   addPassport() {
@@ -68,5 +64,12 @@ export class BookingComponent {
 
   removeGuest(index: number) {
     this.guests.removeAt(index);
+  }
+
+  addGuestControl(): FormGroup {
+    return this.fb.group({
+      guestName: [''],
+      age: new FormControl('')
+    });
   }
 }
