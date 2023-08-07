@@ -3,6 +3,13 @@
 {{ bookingForm.dirty | json }}
 <!-- <br> -->
 
+<div>
+    <button mat-raised-button color="primary" (click)="addPassport()">Add Passport</button>
+</div>
+<div>
+    <button mat-raised-button color="primary" (click)="removePassport()">Delete Passport</button>
+</div>
+
 <form action="" 
 class="example-form" 
 [formGroup]="bookingForm"
@@ -11,6 +18,10 @@ class="example-form"
     <mat-form-field class="example-full-width">
         <mat-label>Room Id</mat-label>
         <input matInput placeholder="Ex. 2" formControlName="roomId">
+    </mat-form-field>
+    <mat-form-field *ngIf="bookingForm.get('passport')" class="example-full-width">
+        <mat-label>Passport</mat-label>
+        <input matInput placeholder="Passport Number" formControlName="passport">
     </mat-form-field>
     <mat-form-field class="example-full-width">
         <mat-label>Guest Email</mat-label>
@@ -87,40 +98,49 @@ class="example-form"
         </mat-accordion>
     </div>
 
+    <div>
+        <button mat-raised-button type="button" color="primary" (click)="addGuest()">Add Guest</button>
+    </div>
+
+    <div formArrayName="guests">
+        <mat-accordion class="example-headers-align" multi>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Guests
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <div *ngFor="let guest of guests.controls; let i=index">
+                <div [formGroupName]="i">
+                    <mat-accordion class="example-headers-align" multi>
+                        <mat-expansion-panel>
+                          <mat-expansion-panel-header>
+                            <mat-panel-title>
+                              Guest {{i+1}}
+                            </mat-panel-title>
+                          </mat-expansion-panel-header>
+                      
+                          <mat-form-field class="example-full-width">
+                            <mat-label>Guest Name</mat-label>
+                            <input matInput placeholder="Guest Name" formControlName="guestName">
+                          </mat-form-field>
+                      
+                          <mat-form-field class="example-full-width">
+                            <mat-label>Guest age</mat-label>
+                            <input matInput placeholder="Guest Email" formControlName="age">
+                          </mat-form-field>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                </div>
+                <div>
+                    <button mat-raised-button type="button" color="warn" (click)="removeGuest(i)">Delete Guest</button>
+                </div>
+            </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
 
     <div>
         <button mat-raised-button color="primary">Book</button>
     </div>
-    <!-- <mat-form-field class="example-full-width">
-        <mat-label>Booking Date</mat-label>
-        <input matInput placeholder="Ex. 2" formControlName="bookingDate">
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-        <mat-label>Mobile Number</mat-label>
-        <input matInput placeholder="Ex. 2" formControlName="mobileNumber">
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-        <mat-label>Guest Name</mat-label>
-        <input matInput placeholder="Ex. 2" formControlName="guestName">
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-        <mat-label>Guest Address</mat-label>
-        <input matInput placeholder="Ex. 2" formControlName="guestAddress">
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-        <mat-label>Guest City</mat-label>
-        <input matInput placeholder="Ex. 2" formControlName="guestCity">
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-        <mat-label>Guest State</mat-label>
-        <input matInput placeholder="Ex. 2" formControlName="guestState">
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-        <mat-label>Guest Country</mat-label>
-        <input matInput placeholder="Ex. 2" formControlName="guestCountry">
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-        <mat-label>Guest Zip Code</mat-label>
-        <input matInput placeholder="Ex. 2" formControlName="guestZipCode">
-    </mat-form-field> -->
 </form>

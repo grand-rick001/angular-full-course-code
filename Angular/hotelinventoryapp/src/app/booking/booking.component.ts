@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ConfigService } from '../services/config.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-booking',
@@ -32,10 +32,41 @@ export class BookingComponent {
         country: [''],
         zipCode: ['']
       }),
+      guests: this.fb.array([
+        this.fb.group({
+        guestName: [''],
+        age: new FormControl('')
+        })
+      ])
     });
+  }
+
+  get guests() {
+    return this.bookingForm.get('guests') as FormArray;
   }
 
   addBooking() {
     console.log(this.bookingForm.value);
+  }
+
+  addGuest() {
+    this.guests.push(this.fb.group({
+      guestName: [''],
+      age: new FormControl('')
+    }));
+  }
+
+  addPassport() {
+    this.bookingForm.addControl('passport', new FormControl(''));
+  }
+
+  removePassport() {
+    if (this.bookingForm.contains('passport')) {
+      this.bookingForm.removeControl('passport');
+    }
+  }
+
+  removeGuest(index: number) {
+    this.guests.removeAt(index);
   }
 }
