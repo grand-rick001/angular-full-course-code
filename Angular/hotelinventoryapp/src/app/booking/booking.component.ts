@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ConfigService } from '../services/config.service';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-booking',
@@ -15,26 +15,27 @@ export class BookingComponent {
 
   ngOnInit() {
     this.bookingForm = this.fb.group({
-      roomId: [''],
-      guestEmail: [''],
+      roomId: new FormControl('', { validators: [Validators.required] }),
+      guestEmail: ['', [Validators.required, Validators.email]],
       checkinDate: [''],
       checkoutDate: [''],
       bookingStatus: [''],
       bookingAmount: [''],
       bookingDate: [''],
       mobileNumber: [''],
-      guestName: [''],
+      guestName: ['', [Validators.required, Validators.minLength(5)]],
       address: this.fb.group({
-        addressLine1: [''],
+        addressLine1: ['', [Validators.required]],
         addressLine2: [''],
-        city: [''],
-        state: [''],
+        city: ['', [Validators.required]],
+        state: ['', [Validators.required]],
         country: [''],
         zipCode: ['']
       }),
       guests: this.fb.array([
         this.addGuestControl()
-      ])
+      ]),
+      tnc: new FormControl(false, { validators: [Validators.requiredTrue] })
     });
   }
 
@@ -44,6 +45,34 @@ export class BookingComponent {
 
   addBooking() {
     console.log(this.bookingForm.value);
+    this.bookingForm.reset(
+      {
+        roomId: '',
+        guestEmail: '',
+        checkinDate: '',
+        checkoutDate: '',
+        bookingStatus: '',
+        bookingAmount: '',
+        bookingDate: '',
+        mobileNumber: '',
+        guestName: '',
+        address: {
+          addressLine1: '',
+          addressLine2: '',
+          city: '',
+          state: '',
+          country: '',
+          zipCode: ''
+        },
+        guests: [
+          {
+            guestName: '',
+            age: ''
+          }
+        ],
+        tnc: false
+      }
+    );
   }
 
   addGuest() {
@@ -68,7 +97,7 @@ export class BookingComponent {
 
   addGuestControl(): FormGroup {
     return this.fb.group({
-      guestName: [''],
+      guestName: ['', [Validators.required]],
       age: new FormControl('')
     });
   }

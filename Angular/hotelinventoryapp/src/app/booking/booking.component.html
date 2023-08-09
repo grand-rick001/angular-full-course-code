@@ -59,6 +59,12 @@ class="example-form"
         <mat-label>Booking Amount</mat-label>
         <input matInput placeholder="Ex. 2" formControlName="bookingAmount">
     </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <mat-label>Guest Name</mat-label>
+        <input #guestName matInput placeholder="Guest Name" formControlName="guestName">
+        <!-- {{bookingForm.get('guestName')?.errors | json}} -->
+        <mat-error *ngIf="bookingForm.get('guestName')?.hasError('minlength')">Guest Name should be at least 5 characters</mat-error>
+    </mat-form-field>
 
     <div formGroupName="address">
         <mat-accordion class="example-headers-align" multi>
@@ -72,6 +78,7 @@ class="example-form"
               <mat-form-field class="example-full-width">
                 <mat-label>Address Line 1</mat-label>
                 <input matInput placeholder="Address Line 1" formControlName="addressLine1">
+                <mat-error *ngIf="bookingForm.get('address.addressLine1')?.hasError('required')">Address Line1 is required</mat-error>
               </mat-form-field>
           
               <mat-form-field class="example-full-width">
@@ -123,6 +130,7 @@ class="example-form"
                           <mat-form-field class="example-full-width">
                             <mat-label>Guest Name</mat-label>
                             <input matInput placeholder="Guest Name" formControlName="guestName">
+                            <mat-error *ngIf="bookingForm.get(['guests', i, 'guestName'])?.hasError('required')">Guest Name is required</mat-error>
                           </mat-form-field>
                       
                           <mat-form-field class="example-full-width">
@@ -139,8 +147,11 @@ class="example-form"
             </mat-expansion-panel>
         </mat-accordion>
     </div>
+    <div>
+      <mat-checkbox formControlName="tnc" class="example-margin">TnC</mat-checkbox>
+    </div>
 
     <div>
-        <button mat-raised-button color="primary">Book</button>
+        <button [disabled]="bookingForm.invalid" mat-raised-button color="primary">Book</button>
     </div>
 </form>
