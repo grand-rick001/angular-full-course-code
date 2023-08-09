@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ConfigService } from '../services/config.service';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { BookingService } from './booking.service';
+import { exhaustMap, mergeMap, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-booking',
@@ -11,18 +13,29 @@ export class BookingComponent {
 
   bookingForm: FormGroup = new FormGroup({});
 
-  constructor (private configService: ConfigService, private fb: FormBuilder) {}
+  constructor (private configService: ConfigService, private fb: FormBuilder, private bookingService: BookingService) {}
 
   ngOnInit() {
     this.bookingForm = this.fb.group({
       roomId: new FormControl('', { validators: [Validators.required] }),
-      guestEmail: ['', [Validators.required, Validators.email]],
+      guestEmail: [
+        '', 
+        { 
+          updateOn: 'blur',
+          validators: [Validators.required, Validators.email]
+        }
+      ],
       checkinDate: [''],
       checkoutDate: [''],
       bookingStatus: [''],
       bookingAmount: [''],
       bookingDate: [''],
-      mobileNumber: [''],
+      mobileNumber: [
+        '',
+        { 
+        updateOn: 'blur',
+        }
+      ],
       guestName: ['', [Validators.required, Validators.minLength(5)]],
       address: this.fb.group({
         addressLine1: ['', [Validators.required]],
@@ -36,7 +49,28 @@ export class BookingComponent {
         this.addGuestControl()
       ]),
       tnc: new FormControl(false, { validators: [Validators.requiredTrue] })
-    });
+    },
+    {
+      updateOn: 'change'
+    }
+    );
+
+    this.getBookingData();
+
+    this.bookingForm.valueChanges
+      .pipe(
+        exhaustMap((data) => {
+          return this.bookingService.bookRoom(data);
+        }))
+      .subscribe((data) => {
+        console.log(data);
+      });
+
+    // this.bookingForm.valueChanges.subscribe((data) => {
+    //   this.bookingService.bookRoom(data).subscribe((data) => {
+    //     // console.log(data);
+    //   });
+    // });
   }
 
   get guests() {
@@ -45,34 +79,37 @@ export class BookingComponent {
 
   addBooking() {
     console.log(this.bookingForm.value);
-    this.bookingForm.reset(
-      {
-        roomId: '',
-        guestEmail: '',
-        checkinDate: '',
-        checkoutDate: '',
-        bookingStatus: '',
-        bookingAmount: '',
-        bookingDate: '',
-        mobileNumber: '',
-        guestName: '',
-        address: {
-          addressLine1: '',
-          addressLine2: '',
-          city: '',
-          state: '',
-          country: '',
-          zipCode: ''
-        },
-        guests: [
-          {
-            guestName: '',
-            age: ''
-          }
-        ],
-        tnc: false
-      }
-    );
+    // this.bookingForm.reset(
+    //   {
+    //     roomId: '',
+    //     guestEmail: '',
+    //     checkinDate: '',
+    //     checkoutDate: '',
+    //     bookingStatus: '',
+    //     bookingAmount: '',
+    //     bookingDate: '',
+    //     mobileNumber: '',
+    //     guestName: '',
+    //     address: {
+    //       addressLine1: '',
+    //       addressLine2: '',
+    //       city: '',
+    //       state: '',
+    //       country: '',
+    //       zipCode: ''
+    //     },
+    //     guests: [
+    //       {
+    //         guestName: '',
+    //         age: ''
+    //       }
+    //     ],
+    //     tnc: false
+    //   }
+    // );
+    // this.bookingService.bookRoom(this.bookingForm.value).subscribe((data) => {
+    //   console.log(data);
+    // });
   }
 
   addGuest() {
@@ -93,6 +130,35 @@ export class BookingComponent {
 
   removeGuest(index: number) {
     this.guests.removeAt(index);
+  }
+
+  getBookingData() {
+    this.bookingForm.patchValue({
+      roomId: '2',
+      guestEmail: 'test@gmail.com',
+      checkinDate: new Date('10-Feb-2020'),
+      // checkoutDate: '',
+      bookingStatus: '',
+      bookingAmount: '',
+      bookingDate: '',
+      mobileNumber: '',
+      guestName: '',
+      address: {
+        addressLine1: '',
+        addressLine2: '',
+        city: '',
+        state: '',
+        country: '',
+        zipCode: ''
+      },
+      guests: [
+        {
+          guestName: '',
+          age: ''
+        }
+      ],
+      tnc: false
+    })
   }
 
   addGuestControl(): FormGroup {
