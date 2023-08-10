@@ -1,6 +1,6 @@
-{{ bookingForm.value | json }}
+<!-- {{ bookingForm.value | json }}
 {{ bookingForm.pristine | json }}
-{{ bookingForm.dirty | json }}
+{{ bookingForm.dirty | json }} -->
 <!-- <br> -->
 
 <div>
@@ -39,18 +39,20 @@ class="example-form"
             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
-    <!-- <mat-form-field class="example-full-width">
-        <mat-label>Check-out Date</mat-label>
+    <mat-form-field class="example-full-width">
+        <mat-label>Check-Out Date</mat-label>
             <input 
             matInput
             formControlName="checkoutDate"
-            [matDatepicker]="picker">
+            [matDatepicker]="checkout">
             <mat-hint>
                 MM/DD/YYYY
             </mat-hint>
-            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field> -->
+            {{ bookingForm.get('checkoutDate')?.errors | json }}
+            <mat-datepicker-toggle matIconSuffix [for]="checkout"></mat-datepicker-toggle>
+        <mat-datepicker #checkout></mat-datepicker>
+    </mat-form-field>
+
     <mat-form-field class="example-full-width">
         <mat-label>Booking Status</mat-label>
         <input matInput placeholder="Ex. 2" formControlName="bookingStatus">
@@ -66,7 +68,7 @@ class="example-form"
     <mat-form-field class="example-full-width">
         <mat-label>Guest Name</mat-label>
         <input #guestName matInput placeholder="Guest Name" formControlName="guestName">
-        <!-- {{bookingForm.get('guestName')?.errors | json}} -->
+        {{bookingForm.get('guestName')?.errors | json}}
         <mat-error *ngIf="bookingForm.get('guestName')?.hasError('minlength')">Guest Name should be at least 5 characters</mat-error>
     </mat-form-field>
 

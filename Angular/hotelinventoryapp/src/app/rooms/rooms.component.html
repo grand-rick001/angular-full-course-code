@@ -2,7 +2,7 @@
 <!-- <h1>Welcome to {{hotelName}}</h1> -->
 <router-outlet></router-outlet>
 
-<app-header></app-header>
+<!-- <app-header></app-header> -->
 <!-- <app-header></app-header>
 <app-header></app-header>
 <app-header></app-header>
@@ -10,35 +10,35 @@
 
 <!-- {{rooms$ | async | json}} -->
 
-Number of Rooms
+<!-- Number of Rooms
 <div 
 [ngStyle]="{'color': rooms.availableRooms > 0 ? 'green' : 'red'}" 
 [innerText]="numberOfRooms">
-</div>
+</div> -->
 
 <!-- Event binding -->
-<button (click)="toggle()">Toggle</button>
+<!-- <button (click)="toggle()">Toggle</button>
 
 <button (click)="editRoom()">Edit Room</button>
 
-<button (click)="deleteRoom()">Delete Room</button>
+<button (click)="deleteRoom()">Delete Room</button> -->
 
 <!-- <div *ngIf="selectedRoom">
     {{ selectedRoom | json }}
 </div> -->
 
-<h1>
+<!-- <h1>
     {{totalBytes}}
-</h1>
+</h1> -->
 
 <div>
-    <button class="btn btn-warning" (click)="addRoom()"> Add Room </button>
+    <button class="btn btn-success" (click)="addRoom()"> Add Room </button>
 </div>
 
-<h1>
-    <!-- {{ getError$ | async | json }} -->
+<!-- <h1>
+    {{ getError$ | async | json }}
     Number of Rooms: {{ roomsCount$ | async }}
-</h1>
+</h1> -->
 
 
 
@@ -52,9 +52,9 @@ Number of Rooms
 </div>
 
 <!-- structural directive -->
-<div [ngSwitch]="color">
+<!-- <div [ngSwitch]="color">
     <div *ngSwitchCase="'yellow'">yellow</div>
     <div *ngSwitchCase="'red'">red</div>
     <div *ngSwitchCase="'blue'">blue</div>
     <div *ngSwitchDefault>No color is correct</div>
-</div>
+</div> -->

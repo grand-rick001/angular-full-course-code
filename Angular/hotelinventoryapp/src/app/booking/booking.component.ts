@@ -3,6 +3,7 @@ import { ConfigService } from '../services/config.service';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { BookingService } from './booking.service';
 import { exhaustMap, mergeMap, switchMap } from 'rxjs/operators';
+import { CustomValidator } from './validators/custom-validators';
 
 @Component({
   selector: 'app-booking',
@@ -36,7 +37,7 @@ export class BookingComponent {
         updateOn: 'blur',
         }
       ],
-      guestName: ['', [Validators.required, Validators.minLength(5)]],
+      guestName: ['', [Validators.required, Validators.minLength(5), CustomValidator.ValidateName, CustomValidator.ValidateSpecialCharacters('*')]],
       address: this.fb.group({
         addressLine1: ['', [Validators.required]],
         addressLine2: [''],
@@ -51,20 +52,21 @@ export class BookingComponent {
       tnc: new FormControl(false, { validators: [Validators.requiredTrue] })
     },
     {
-      updateOn: 'change'
+      updateOn: 'change',
+      validators: [CustomValidator.validateDate]
     }
     );
 
     this.getBookingData();
 
-    this.bookingForm.valueChanges
-      .pipe(
-        exhaustMap((data) => {
-          return this.bookingService.bookRoom(data);
-        }))
-      .subscribe((data) => {
-        console.log(data);
-      });
+    // this.bookingForm.valueChanges
+    //   .pipe(
+    //     exhaustMap((data) => {
+    //       return this.bookingService.bookRoom(data);
+    //     }))
+    //   .subscribe((data) => {
+    //     console.log(data);
+    //   });
 
     // this.bookingForm.valueChanges.subscribe((data) => {
     //   this.bookingService.bookRoom(data).subscribe((data) => {
