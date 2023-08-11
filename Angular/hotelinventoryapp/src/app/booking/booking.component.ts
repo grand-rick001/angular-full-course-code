@@ -2,8 +2,11 @@ import { Component } from '@angular/core';
 import { ConfigService } from '../services/config.service';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { BookingService } from './booking.service';
-import { exhaustMap, mergeMap, switchMap } from 'rxjs/operators';
+import { exhaustMap, map, mergeMap, switchMap } from 'rxjs/operators';
 import { CustomValidator } from './validators/custom-validators';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { Observable } from 'rxjs';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-booking',
@@ -13,12 +16,24 @@ import { CustomValidator } from './validators/custom-validators';
 export class BookingComponent {
 
   bookingForm: FormGroup = new FormGroup({});
+  
 
-  constructor (private configService: ConfigService, private fb: FormBuilder, private bookingService: BookingService) {}
+  constructor (
+    private configService: ConfigService,
+    private fb: FormBuilder,
+    private bookingService: BookingService, 
+    private route: ActivatedRoute,
+    public dialog: MatDialog
+    ) {}
 
   ngOnInit() {
+    let roomId: string = '';
+    this.route.paramMap.pipe(
+      map((params: ParamMap) =>  params.get('roomid')!)
+    ).subscribe((data) => roomId = data);
+
     this.bookingForm = this.fb.group({
-      roomId: new FormControl('', { validators: [Validators.required] }),
+      roomId: new FormControl(roomId, { validators: [Validators.required] }),
       guestEmail: [
         '', 
         { 
@@ -56,8 +71,9 @@ export class BookingComponent {
       validators: [CustomValidator.validateDate]
     }
     );
+    
 
-    this.getBookingData();
+    // this.getBookingData();
 
     // this.bookingForm.valueChanges
     //   .pipe(
@@ -73,6 +89,14 @@ export class BookingComponent {
     //     // console.log(data);
     //   });
     // });
+  }
+
+  openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+    this.dialog.open(BookingComponent, {
+      width: '250px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
   }
 
   get guests() {
@@ -136,7 +160,7 @@ export class BookingComponent {
 
   getBookingData() {
     this.bookingForm.patchValue({
-      roomId: '2',
+      roomId: '0101',
       guestEmail: 'test@gmail.com',
       checkinDate: new Date('10-Feb-2020'),
       // checkoutDate: '',

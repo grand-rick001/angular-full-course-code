@@ -11,10 +11,11 @@
 </div>
 
 <form action="" 
-class="example-form" 
-[formGroup]="bookingForm"
-(ngSubmit)="addBooking()"
+  class="example-form" 
+  [formGroup]="bookingForm"
+  (ngSubmit)="addBooking()"
 >
+    <button mat-raised-button (click)="openDialog('0ms', '0ms')">Open dialog without animation</button>
     <mat-form-field class="example-full-width">
         <mat-label>Room Id</mat-label>
         <input matInput placeholder="Ex. 2" formControlName="roomId">
