@@ -39,8 +39,10 @@
     {{ getError$ | async | json }}
     Number of Rooms: {{ roomsCount$ | async }}
 </h1> -->
-
-
+{{ priceFilter | json }}
+<div>
+    <input type="number" class="form-control" [formControl]="priceFilter" placeholder="Price" >
+</div>
 
 <!-- <div *ngIf="rooms$ | async as rooms"> -->
     <!-- Structural and Attribute directives Directives -->
@@ -48,7 +50,7 @@
 </div> -->
 <div *ngIf="roomList.length">
     <!-- Structural and Attribute directives Directives -->
-    <app-rooms-list [rooms]="roomList" [title]="title" (selectedRoom)="selectRoom($event)"></app-rooms-list>
+    <app-rooms-list [price]="priceFilter.value!" [rooms]="roomList" [title]="title" (selectedRoom)="selectRoom($event)"></app-rooms-list>
 </div>
 
 <!-- structural directive -->

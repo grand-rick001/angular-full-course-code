@@ -15,6 +15,7 @@ import { RoomsService } from '../services/rooms.service';
 import { Observable, Subject, Subscription, catchError, map, of } from 'rxjs';
 import { HttpEventType } from '@angular/common/http';
 import { ConfigService } from '../services/config.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-rooms',
@@ -39,6 +40,7 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
       return of([]);
     })
   );
+  priceFilter = new FormControl(0);
   error$: Subject<string> = new Subject();
   getError$ = this.error$.asObservable();
   roomsCount$ = this.roomsService.getRooms$.pipe(
@@ -67,7 +69,7 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
   ngOnInit(): void {
     this.roomsService.getRooms().subscribe((rooms: RoomList[]) => this.roomList = rooms);
     this.roomsService.getPhotos().subscribe((event: any) => {
-      console.log(event);
+      // console.log(event);
 
       switch (event.type) {
         case HttpEventType.Sent: {

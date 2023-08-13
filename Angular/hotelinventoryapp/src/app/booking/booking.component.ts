@@ -15,7 +15,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 })
 export class BookingComponent {
 
-  bookingForm: FormGroup = new FormGroup({});
+  bookingForm!: FormGroup;
   
 
   constructor (
@@ -91,13 +91,13 @@ export class BookingComponent {
     // });
   }
 
-  openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
-    this.dialog.open(BookingComponent, {
-      width: '250px',
-      enterAnimationDuration,
-      exitAnimationDuration,
-    });
-  }
+  // openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+  //   this.dialog.open(BookingComponent, {
+  //     width: '250px',
+  //     enterAnimationDuration,
+  //     exitAnimationDuration,
+  //   });
+  // }
 
   get guests() {
     return this.bookingForm.get('guests') as FormArray;

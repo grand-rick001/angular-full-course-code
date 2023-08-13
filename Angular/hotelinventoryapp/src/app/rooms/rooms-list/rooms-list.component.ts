@@ -5,12 +5,13 @@ import { RoomList } from '../room';
   selector: 'app-rooms-list',
   templateUrl: './rooms-list.component.html',
   styleUrls: ['./rooms-list.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RoomsListComponent implements OnInit, OnChanges, OnDestroy {
   @Input() rooms: RoomList[] | null = [];
   @Input() title: string = '';
   @Output() selectedRoom = new EventEmitter<RoomList>();
+  @Input() price: number = 0;
 
   constructor() {}
 
