@@ -30,6 +30,7 @@ const routes: Routes = [
     canDeactivate: [bookingGuard]
     // canMatch: [loginGuard]
   },
+  { path: 'comments', loadChildren: () => import('./comment/comment.module').then(m => m.CommentModule) },
   { path: '**', component: NotfoundComponent }
 ];
 
